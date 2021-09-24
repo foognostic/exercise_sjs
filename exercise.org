@@ -1,15 +1,63 @@
-* TODO setup [3/3]
-  - [X] pick a language: rust
-    + not technically my strongest, but recently familiar and I want to do less Ruby
-  - [X] pick a starting point
-    + advent of code repository
-    + existing code for reading .gitignored input data
-  - [X] use a stable build of rust
-    + 1.55 (current stable)
-    + set edition to 2018
-* TODO package solution
+* approach
+  + the data model at a glance:
+    + band (pieces of the input data)
+    + duo (pair of bands)
+      + gotcha: verify that order does not change the logical identity of a duo
+    + concert (one line of the input data)
+      + gotcha: concerts with one band -- ignore
+    + performance (all lines of the input data)
+  + for each concert, I used a crate to generate the set of duos 
+    + the first crate I used generated a runtime multiplication overflow when it tried to calculate large factorials
+    + the next crate worked fine
+  + for each duo in each concert
+    + add the duo to a hashmap with key = duo, value = # concerts
+  + after all concerts, print duos with at least 50 concerts
+  + Seeing the performance of the release build, I didn't see immediate need for performance optimizations and I had several job phone calls today.
+    + release: ~1 second
+    + debug: ~10 seconds
+      + rust only flagged the multiplication overflow in the debug build!!
+    #+begin_src bash
+    $ time cargo run --release ~/src/aoc2020/input-data/day50-star1/full.txt > /dev/null
+        Finished release [optimized] target(s) in 0.01s
+        Running `target/release/exercise-sjs /home/admin/src/aoc2020/input-data/day50-star1/full.txt`
+
+    real    0m1.017s
+    user    0m0.969s
+    sys     0m0.048s
+    #+end_src
+* verification instructions
+  - install Rust 1.55
+    + suggest using rustup to install
+    + `rustup default stable`
+    + Or maybe use docker?
+  - to run code
+    + release
+      #+begin_src bash
+      cargo run --release path_to_input_file.csv
+      #+end_src
+    + debug
+      #+begin_src bash
+      cargo run path_to_input_file.csv
+      #+end_src
+  - to run tests
+    #+begin_src bash
+    cargo test
+    #+end_src
+* archive
+** TODO setup [3/3]
+   - [X] pick a language: rust
+     + not technically my strongest, but recently familiar and I want to do less Ruby
+   - [X] pick a starting point
+     + advent of code repository
+     + existing code for reading .gitignored input data
+   - [X] use a stable build of rust
+     + 1.55 (current stable)
+     + set edition to 2018
+** TODO package solution
   - [ ] build a standalone crate?
   - [ ] use docker somehow to avoid installing rust?
-  - [ ] put code on Github in a private repo
+  - [X] put code on Github in a private repo
+  - [X] document install instructions
+  - [X] document running instructions
   - [X] avoid putting company name anywhere
   - [X] absolutely no input data allowed

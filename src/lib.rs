@@ -7,7 +7,6 @@ use crate::performance::Performance;
 
 pub fn run(input_path: &str) {
     let concerts = support::read_test_data(input_path).unwrap();
-    // let concerts = support::read_test_data("day50-star1/sample.txt").unwrap();
     let mut performance = Performance::new();
 
     for concert in concerts {
