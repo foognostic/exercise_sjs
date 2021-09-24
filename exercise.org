@@ -1,0 +1,15 @@
+* TODO setup [3/3]
+  - [X] pick a language: rust
+    + not technically my strongest, but recently familiar and I want to do less Ruby
+  - [X] pick a starting point
+    + advent of code repository
+    + existing code for reading .gitignored input data
+  - [X] use a stable build of rust
+    + 1.55 (current stable)
+    + set edition to 2018
+* TODO package solution
+  - [ ] build a standalone crate?
+  - [ ] use docker somehow to avoid installing rust?
+  - [ ] put code on Github in a private repo
+  - [X] avoid putting company name anywhere
+  - [X] absolutely no input data allowed
